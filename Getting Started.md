@@ -24,7 +24,21 @@ Lots of existing libraries are bundled in the zip, which you can copy paste to y
 
 # LoRa
 
-## Setting up LoRa
+## Setting up LoRa OTAA
+1. visit the things network EU console https://eu1.cloud.thethings.network/console/
+2. you may need to create an account first
+3. Create a new application with the name "makezurch-badge-2023-YOURNAME"
+4. On your pico run `AT+ID` to get the AppEui (also referenced as JoinEUI), DevEui, DevAddr
+4. Register end device
+    * manual
+    * frequency plan: Europe SF9 863-870
+    * LoRa version 1.0.3
+    * for JoinEUI fill in the AppEUI
+5. Configure LoRa with the value from Activation Information > AppKey
+   1. AT+KEY=APPKEY,"AppKey"
+
+
+## Setting up LoRa ABP
 1. visit the things network EU console https://eu1.cloud.thethings.network/console/
 2. you may need to create an account first
 3. Create a new application with the name "makezurch-badge-2023-YOURNAME"
@@ -33,6 +47,10 @@ Lots of existing libraries are bundled in the zip, which you can copy paste to y
     * manual
     * frequency plan Europe SF9 863-870
     * LoRa version 1.0.3
+6. Configure LoRa with the values from Session information section
+   1. AT+ID=DevAddr,"Device address"
+   2. AT+KEY=NWKSKEY,"NwkSKey"
+
 
 ## sending packages
 We use the UART port on pin 4 and 5 to write AT commands to the "Seed Studio LoRa E5".
@@ -94,4 +112,8 @@ https://learn.adafruit.com/matrix-keypad/pinouts
   * AT+MODE is stored
   * class can be stored with: AT+CLASS=A,SAVE (default is A)
   * AT-PORT is stored
-  * AT+KEY is **not stored**, and needs to be provided on every power cycle
+  * AT+KEY is stored
+
+* How to measure RSSI, is there a command?
+* What is a good RSSI?
+* Why is OTAA better than ABP? [link](https://www.thethingsindustries.com/docs/devices/abp-vs-otaa/#otaa)
