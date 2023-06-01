@@ -88,6 +88,13 @@ screen /dev/tty.usbmodemXXX 115200
 `import machine` is used by micropython
 
 # Hardware
+
+## AP9 box
+The MakeZurich Badge fits into a standard AP9 box (80x80x35mm).
+The perfect case for your a small
+
+![AP9.png](pictures/AP9.png)
+
 ## Matrix Keypad
 https://learn.adafruit.com/matrix-keypad/pinouts
 
