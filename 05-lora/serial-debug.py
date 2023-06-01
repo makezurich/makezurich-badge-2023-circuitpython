@@ -15,7 +15,8 @@ while True:
     if supervisor.runtime.serial_bytes_available:
         allstring=""
         # wait for user input
-        userinput = input() #input command
+        userinput = input().strip() #input command
+        userinput = userinput + "\n"
         # convert to byte
         b = bytes(userinput, 'utf-8')
         # write out the byte
