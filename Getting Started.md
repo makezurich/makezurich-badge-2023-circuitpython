@@ -52,9 +52,11 @@ Lots of existing libraries are bundled in the zip, which you can copy paste to y
    2. AT+KEY=NWKSKEY,"NwkSKey"
 
 
-## sending packages
+## Sending Packages
 We use the UART port on pin 4 and 5 to write AT commands to the "Seed Studio LoRa E5".
-It uses LoRa Version 1.0.3
+It uses LoRa Version 1.0.3.
+
+> If you want to play with the AT commands yourself see example 05-lora/serial-debug.py
 
 To set it up
 
@@ -63,31 +65,18 @@ AT+ID
 # -> Use this info to configure end device in console
 AT+DR=3 # 3 uses EU868 SF9
 AT+CH=NUM,0-2 # no idea what channel to choose
-AT+KEY=APPKEY,"YOUR_APP_KEY_HERE"
 AT+MODE=LWOTAA  # LWOTAA, LWABP
+AT+KEY=APPKEY,"YOUR_APP_KEY_HERE"
 AT+CLASS=A
 AT+PORT=8
 AT+JOIN
 AT+CMSG="Hello"
 
 ```
-
 ABP vs OTAA https://www.thethingsindustries.com/docs/devices/abp-vs-otaa/#otaa
-
-
-
-
 [Documentation](https://files.seeedstudio.com/products/317990687/res/LoRa-E5%20AT%20Command%20Specification_V1.0%20.pdf)
 
 # Knowledge
-
-
-## CircuitPython vs Micropython
-`import machine` is used by micropython
-
-## What is the supervisor?
-It is used to receive data over serial.
-
 
 ## Connecting to Serial
 on macOS:
@@ -95,16 +84,12 @@ on macOS:
 screen /dev/tty.usbmodemXXX 115200
 ```
 
+## CircuitPython vs Micropython
+`import machine` is used by micropython
+
 # Hardware
 ## Matrix Keypad
 https://learn.adafruit.com/matrix-keypad/pinouts
-
-
-```python
-
-
-```
-
 
 # Questions
 * Are the lora configuration values channel, mode, class, appkey persisted?
@@ -117,3 +102,4 @@ https://learn.adafruit.com/matrix-keypad/pinouts
 * How to measure RSSI, is there a command?
 * What is a good RSSI?
 * Why is OTAA better than ABP? [link](https://www.thethingsindustries.com/docs/devices/abp-vs-otaa/#otaa)
+* What does the package "supervisor" do? It is used to receive data over serial, while being plugged into USB.
