@@ -1,10 +1,13 @@
 
 # getting cpu ID
-import machine, microcontroller
-print(machine.unique_id())
-print(microcontroller.cpu.uid)
-
-
-# getting CPU temperature
 import microcontroller
-microcontroller.cpu.temperature
+import binascii
+print(microcontroller.cpu.uid)
+# converting the bytes to a human string
+device_uid = binascii.hexlify(microcontroller.cpu.uid).decode("utf-8")
+print(device_uid)
+
+
+# getting CPU temperature in C
+import microcontroller
+print(microcontroller.cpu.temperature)
