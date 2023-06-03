@@ -79,6 +79,10 @@ The MakeZurich Badge fits into a standard AP9 box (80x80x35mm).
 
 ![AP9.png](pictures/AP9.png)
 
+# Pinouts
+* [MakeZurich Badge](pinout.png)
+* [Pico W](picow-pinout.png)
+
 # Questions
 * Are the lora configuration values channel, mode, class, appkey persisted? -> Yes
 * How to measure RSSI, is there a command?
