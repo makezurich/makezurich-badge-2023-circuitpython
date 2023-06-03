@@ -37,23 +37,8 @@ Lots of existing libraries are bundled in the zip, which you can copy paste to y
 5. Configure LoRa with the value from Activation Information > AppKey
    1. AT+KEY=APPKEY,"AppKey"
 
-
-## Setting up LoRa ABP
-1. visit the things network EU console https://eu1.cloud.thethings.network/console/
-2. you may need to create an account first
-3. Create a new application with the name "makezurch-badge-2023-YOURNAME"
-4. Get the AppEui (also referenced as JoinEUI), DevEui, DevAddr
-5. Create an endpoint
-    * manual
-    * frequency plan Europe SF9 863-870
-    * LoRa version 1.0.3
-6. Configure LoRa with the values from Session information section
-   1. AT+ID=DevAddr,"Device address"
-   2. AT+KEY=NWKSKEY,"NwkSKey"
-
-
 ## Sending Packages
-We use the UART port on pin 4 and 5 to write AT commands to the "Seed Studio LoRa E5".
+We use the UART port on pin GP4 and GP5 to send AT commands to the "Seed Studio LoRa E5".
 It uses LoRa Version 1.0.3.
 
 > If you want to play with the AT commands yourself see example 05-lora/serial-debug.py
@@ -62,7 +47,7 @@ To set it up
 
 ```bash
 AT+ID
-# -> Use this info to configure end device in console
+# -> Use this info to configure your device in the thingsnetwork console
 AT+DR=3 # 3 uses EU868 SF9
 AT+CH=NUM,0-2 # no idea what channel to choose
 AT+MODE=LWOTAA  # LWOTAA, LWABP
@@ -74,7 +59,7 @@ AT+CMSG="Hello"
 
 ```
 ABP vs OTAA https://www.thethingsindustries.com/docs/devices/abp-vs-otaa/#otaa
-[Documentation](https://files.seeedstudio.com/products/317990687/res/LoRa-E5%20AT%20Command%20Specification_V1.0%20.pdf)
+[Seed Studio LoRa E5 Documentation](https://files.seeedstudio.com/products/317990687/res/LoRa-E5%20AT%20Command%20Specification_V1.0%20.pdf)
 
 # Knowledge
 
@@ -94,18 +79,9 @@ The MakeZurich Badge fits into a standard AP9 box (80x80x35mm).
 
 ![AP9.png](pictures/AP9.png)
 
-## Matrix Keypad
-https://learn.adafruit.com/matrix-keypad/pinouts
-
 # Questions
-* Are the lora configuration values channel, mode, class, appkey persisted?
-  * AT+DR is stored
-  * AT+MODE is stored
-  * class can be stored with: AT+CLASS=A,SAVE (default is A)
-  * AT-PORT is stored
-  * AT+KEY is stored
-
+* Are the lora configuration values channel, mode, class, appkey persisted? -> Yes
 * How to measure RSSI, is there a command?
 * What is a good RSSI?
 * Why is OTAA better than ABP? [link](https://www.thethingsindustries.com/docs/devices/abp-vs-otaa/#otaa)
-* What does the package "supervisor" do? It is used to receive data over serial, while being plugged into USB.
+* What does the python package "supervisor" do? It is used to receive data over serial, while being plugged into USB.
