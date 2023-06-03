@@ -2,10 +2,10 @@
 
 ## Hardware
 * Raspberry Pi Pico W (W stands for Wi-Fi)
-* Seed Studio LoRa E5, Pin 4 + 5
-* 6 Neopixels on Pin 22
-* 1 LED on Pin 8
-* 1 Button on Pin 6
+* Seed Studio LoRa E5, Pin GP4 + GP5
+* 6 Neopixels on Pin GP22
+* 1 LED on Pin GP8
+* 1 Button on Pin GP6
 * 4 expansion ports (Grove)
 * 1 PicoW onboard LED, Pin LED
 
@@ -91,7 +91,6 @@ screen /dev/tty.usbmodemXXX 115200
 
 ## AP9 box
 The MakeZurich Badge fits into a standard AP9 box (80x80x35mm).
-The perfect case for your a small
 
 ![AP9.png](pictures/AP9.png)
 
