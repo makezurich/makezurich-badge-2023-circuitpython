@@ -58,10 +58,10 @@ To set it up
 ```bash
 AT+ID
 # -> Use this info to configure your device in the thingsnetwork console
-AT+DR=3 # 3 uses EU868 SF9
-AT+CH=NUM,0-2 # no idea what channel to choose
-AT+MODE=LWOTAA  # LWOTAA, LWABP
-AT+KEY=APPKEY,"YOUR_APP_KEY_HERE"
+AT+DR=5 # 5 sets the datarate to SF7, which is recommended by thingsnetwork
+AT+CH=NUM,0-2 # NOTE(yw): no idea what channel to choose
+AT+MODE=LWOTAA # LWOTAA or LWABP, LWOTAA is recommended
+AT+KEY=APPKEY,"YOUR_APP_KEY_HERE" # appkey when using LWOTAA
 AT+CLASS=A
 AT+PORT=8
 AT+JOIN
@@ -108,7 +108,11 @@ The MakeZurich Badge fits into a standard AP9 box (80x80x35mm).
 ## Questions
 
 * Are the lora configuration values channel, mode, class, appkey persisted? -> Yes
+* Can you read out the AT+KEY of a device? -> No, all KEYs are unreadable for security, the one who forgets his KEY need rewrite with a new key.
 * How to measure RSSI, is there a command?
 * What is a good RSSI?
 * Why is OTAA better than ABP? [link](https://www.thethingsindustries.com/docs/devices/abp-vs-otaa/#otaa)
 * What does the python package "supervisor" do? It is used to receive data over serial, while being plugged into USB.
+* Does every badge have an unique EUI? -> yes
+* How much is the difference for LoRa between a handcrafted binary payload vs serialising to JSON text payload?
+* What are AT commands? -> AT commands are used in modems and other hardware for querying or setting parameters [more](https://www.commfront.com/pages/at-commands)
