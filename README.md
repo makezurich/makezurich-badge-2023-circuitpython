@@ -126,7 +126,7 @@ The MakeZurich Badge fits into a standard AP9 box (80x80x35mm).
 * [Pico W](picow-pinout.png)
 
 ## Questions
-
+* How do you receive packages? You need to send a package and in the response downlink data is included.
 * Are the lora configuration values channel, mode, class, appkey persisted? -> Yes
 * Can you read out the AT+KEY of a device? -> No, all KEYs are unreadable for security, the one who forgets his KEY need rewrite with a new key.
 * How to measure RSSI, is there a command?

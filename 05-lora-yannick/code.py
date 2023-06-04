@@ -79,6 +79,7 @@ def lora_send(msg):
 
     cmd = b"AT+CMSG=" + payload + b"\n"
     result_string = at_send(cmd, 10)
+    # TODO(yw): handle downlink packages, like: +CMSG: PORT: 1; RX: "112233"
     return result_string
 
 print("LoRa IDs:", lora_get_ids())
