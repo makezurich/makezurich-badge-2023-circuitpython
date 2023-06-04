@@ -86,6 +86,8 @@ AT+JOIN
 AT+CMSG="Hello"
 ```
 
+> NOTE: you only need to set the APPKEY once and it is remembered.
+
 You should see in the "Live data" section of your application on
 [TheThingsNetwork console](https://eu1.cloud.thethings.network/console/)
 an entry of type "Forward uplink data message" with a Payload
