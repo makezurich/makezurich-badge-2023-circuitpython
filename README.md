@@ -28,6 +28,24 @@ Lots of existing libraries are bundled in the zip, which you can copy paste to y
 
 > To prevent mistakes I recommend to delete the folders lib/adafruit_featherwing and lib/adafruit_seesaw
 
+## IDE's and extensions that can make your life easier
+
+### VS code
+
+VS code is an easy to use IDE that has a lot of extensions, including extensions for python and also circuit python that safes you some hasle with e.g. adding a specific library to your project (the extensions downloads the latest bundle and places the module you add directly in your lib folder).
+
+See https://code.visualstudio.com for more information and download of Visual Studio Code.
+
+#### Circuit python extension
+
+Get it from the marketplace directly inside VS code, more info can be found in the extension readme:
+- Name: CircuitPython
+- Id: joedevivo.vscode-circuitpython
+- Description: CircuitPython for Visual Studio Code
+- Version: 0.1.20
+- Publisher: joedevivo
+- VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=joedevivo.vscode-circuitpython
+
 ## LoRa
 
 ### Setting up LoRa OTAA
