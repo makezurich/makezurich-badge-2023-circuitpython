@@ -1,6 +1,6 @@
 # from https://learn.adafruit.com/make-it-change-potentiometers/circuitpython
 # Requires an analog pin. For example from the analog Grove port on the back.
-# Analog pin allow you to convert the analog voltage into a digital value.
+# Analog pin allow you to convert the analog voltage into a digital value (ADC).
 
 import time
 import board
