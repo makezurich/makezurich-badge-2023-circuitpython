@@ -58,4 +58,5 @@ while True:
     print("Temperature: %0.1f C" % temperature)
     print("Humidity: %0.1f %%" % relative_humidity)
     print("Color RGB: %s" % colorwheel(t_color))
+    print()
     time.sleep(1)
