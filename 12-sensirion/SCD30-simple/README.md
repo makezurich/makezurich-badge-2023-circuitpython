@@ -4,9 +4,9 @@ Ask someone from the MakeZürich Team if you need one for your project.
 
 ## Required libraries
 Import them from the adafruit bundle either manually or automatically with VS code
-- adafruit_scd4x
-    - Source: https://github.com/adafruit/Adafruit_CircuitPython_SCD4X
-    - Documentation: https://docs.circuitpython.org/projects/scd4x/en/latest/
+- adafruit_scd30
+    - Source: https://github.com/adafruit/Adafruit_CircuitPython_SCD30
+    - Documentation: https://docs.circuitpython.org/projects/scd30/en/latest/
 - adafruit_bus_device
     - Source: https://github.com/adafruit/Adafruit_CircuitPython_BusDevice
 - adafruit_register
