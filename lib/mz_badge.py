@@ -89,21 +89,21 @@ class LoRa_module:
         self.uart = uart
 
     def show_information(self)-> None:
-        self.send_and_recv('AT+CH')
-        self.send_and_recv('AT+MODE')
-        self.send_and_recv('AT+ID')
+        self.at_send('AT+CH')
+        self.at_send('AT+MODE')
+        self.at_send('AT+ID')
 
     def set_mode(self,mode)-> None:
-        self.send_and_recv(f'AT+MODE={mode}')
+        self.at_send(f'AT+MODE={mode}')
 
-    def setup_and_join(self, mode, appkey, appeui) -> bool:
-        self.set_mode(mode)
-        self.send_and_recv(f'AT+KEY=APPKEY, {appkey}')
-        self.send_and_recv(f'AT+ID=APPEUI, {appeui}')
+    def setup_and_join_otaa(self,appkey, appeui) -> bool:
+        self.set_mode('OTAA')
+        self.at_send(f'AT+KEY=APPKEY, {appkey}')
+        self.at_send(f'AT+ID=APPEUI, {appeui}')
         return self.join()
 
     def join(self) -> bool:
-        self.send_and_recv('AT+JOIN')
+        self.at_send('AT+JOIN')
         data = self.uart.readline() 
         while data is  None:
             time.sleep(.2)
@@ -116,7 +116,7 @@ class LoRa_module:
             return True
 
     def send(self, mode,data)-> None:
-        self.send_and_recv(f'AT+{mode}={data}')
+        self.at_send(f'AT+{mode}={data}')
         while data is  None:
             time.sleep(.2)
             data = self.uart.readline()
@@ -124,34 +124,34 @@ class LoRa_module:
 
 
     def send_hex(self,data)-> None:
-        self.send_and_recv(f'AT+MSGHEX={data}')
+        self.at_send(f'AT+MSGHEX={data}')
         while data is  None:
             time.sleep(.2)
             data = self.uart.readline()
         print(f'Sent: {data}')
 
     def send_string(self,data)-> None:
-        self.send_and_recv(f'AT+MSG={data}')
+        self.at_send(f'AT+MSG={data}')
         while data is  None:
             time.sleep(.2)
             data = self.uart.readline()
         print(f'Sent: {data}')
 
     def send_confirmed_hex(self,data)-> None:
-        self.send_and_recv(f'AT+CMSGHEX={data}')
+        self.at_send(f'AT+CMSGHEX={data}')
         while data is  None:
             time.sleep(.2)
             data = self.uart.readline()
         print(f'Sent: {data}')
 
     def send_confirmed_string(self,data)-> None:
-        self.send_and_recv(f'AT+CMSG={data}')
+        self.at_send(f'AT+CMSG={data}')
         while data is  None:
             time.sleep(.2)
             data = self.uart.readline()
         print(f'Sent: {data}')
 
-    def send_and_recv(self,cmd)-> None:
+    def at_send(self,cmd)-> None:
         print(f'--> {cmd}')
         self.uart.write(bytes(cmd,'utf-8'))
         data = self.uart.readline() 
