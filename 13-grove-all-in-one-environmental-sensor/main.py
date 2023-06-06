@@ -1,17 +1,27 @@
-import time
+# MakeZurich Badge 2023
+# Groove All-in-one Environmental Sensor SEN55 Simple Example
 
+# Requires:
+#  lib/sensirion_i2c_driver
+#  lib/sensirion_i2c_sen5x
+#  lib/adafruit_logging.mpy
+
+import time
 import board
 import busio
-
 from sensirion_i2c_driver import I2cTransceiver, I2cConnection
 from sensirion_i2c_sen5x import Sen5xI2cDevice
+
+# See badge pinout, depending on the connector you use 
+# you have to select the corresponding GPIOs used for the I2C communication
+# https://github.com/makezurich/makezurich-badge-2023/blob/main/makezurich2023-badge-pinout.png
+# The format is busio.I2C(SCL, SDA)
+# The example below assumes you used I2C1 on the badge
+i2c = busio.I2C(scl=board.GP3, sda=board.GP2)
 
 # The address can be found on the back of the Grove All-in-one Environmental Sensor
 SEN5X_DEFAULT_ADDRESS = 0x69
 
-# setup i2c - see CircuitPython docs, or get from board
-# https://learn.adafruit.com/getting-started-with-raspberry-pi-pico-circuitpython/pinouts#no-default-board-devices-3082902
-i2c = busio.I2C(scl=board.GP3, sda=board.GP2)
 transceiver = I2cTransceiver(i2c, SEN5X_DEFAULT_ADDRESS)
 device = Sen5xI2cDevice(I2cConnection(transceiver))
 

@@ -17,7 +17,14 @@ Unzip the bundle and copy `adafruit-circuitpython-bundle-8.x-mpy-20230604/lib/ad
 `CIRCUITPY/lib/adafruit_logging.mpy`.
 
 ### Sensirion
+#### Pre-compiled versions with modifications added
+For convinience during MakeZürich, precompiled versions of the two modified sensirion libraries have been added to the /lib folder in the root of this repository.
 
+If you are using those, you can skip the manual steps.
+
+Keep in mind that for the long run someone needs to step up and build / maintain a proper library and possibly add it to the adafruit library pack.
+
+#### Manually checkout and modify
 The author of this [GitHub issue](https://github.com/Sensirion/python-i2c-sen5x/issues/3)
 forked two GitHub repositories from Sensirion and implemented modifications to make
 the two required Python libraries compatible with [CircuitPython](https://circuitpython.org/).
