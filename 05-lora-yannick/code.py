@@ -15,6 +15,48 @@ import struct
 
 uart = busio.UART(board.GP4, board.GP5, baudrate=9600, timeout=20)
 
+def main():
+    print("LoRa IDs:", lora_get_ids())
+
+    # Setting the LoRa Appkey is only required once, will be stored
+    # print(lora_set_appkey(b"APP_KEY_FROM_THINGS_CONSOLE"))
+
+    # Setting the LoRa datarate is only required once, will be stored
+    # print(lora_set_datarate())
+
+    response = lora_join()
+    print(response)
+
+    DEVICE_HEALTHY = 0
+    DEVICE_LOW_BATTERY = 1
+    DEVICE_ERROR = 2
+
+    device_state = DEVICE_HEALTHY
+    latitude = 47.401330503492595
+    longitute = 8.390119229678902
+    temperature = 25.4 # °C
+    humidity = 25 # %
+    co2_ppm = 1240
+
+    # struct.pack pattern
+    # >: big endian
+    # b: signed char, 1byte
+    # B: unsigned signed char, 1byte 0-255
+    # h: short, 2byte
+    # i: int, 4byte
+    # f: float, 4byte
+    # d: double, 8byte
+    buffer = struct.pack('>bfffbh', device_state, latitude, longitute, temperature, humidity, co2_ppm)
+    print("sending", binascii.hexlify(buffer))
+
+    response = lora_send_hex(buffer)
+    print(response)
+
+    # response = lora_send_text("hello world")
+    # print(response)
+
+    print("finished")
+
 def at_send(cmd, max_time=10):
     if not isinstance(cmd, bytes):
         print("cmd must be a byte string, terminated with new line")
@@ -110,51 +152,5 @@ def lora_send_hex(msg):
     # TODO(yw): check for ": Done"
     return response
 
-print("LoRa IDs:", lora_get_ids())
 
-# Setting the LoRa Appkey is only required once, will be stored
-# print(lora_set_appkey(b"APP_KEY_FROM_THINGS_CONSOLE"))
-
-# Setting the LoRa datarate is only required once, will be stored
-# print(lora_set_datarate())
-
-result = lora_join()
-print(result)
-
-DEVICE_HEALTHY = 0
-DEVICE_LOW_BATTERY = 1
-DEVICE_ERROR = 2
-
-device_state = DEVICE_HEALTHY
-latitude = 47.401330503492595
-longitute = 8.390119229678902
-temperature = 25.4 # °C
-humidity = 25 # %
-co2_ppm = 1240
-
-# struct.pack pattern
-# <: little endian
-# >: big endian
-# b: signed char, 1byte
-# B: unsigned signed char, 1byte 0-255
-# ?: boolean, 1byte 0-1
-# h: short, 2byte
-# i: int, 4byte
-# I: unsigned int, 4byte
-# l: long, 8byte
-# f: float, 4byte
-# d: double, 8byte
-# q: long long int, 8byte
-# Q: unsigned long long, 8byte
-buffer = struct.pack('>bfffbi', device_state, latitude, longitute, temperature, humidity, co2_ppm)
-print("sending", binascii.hexlify(buffer))
-
-response = lora_send_hex(buffer)
-print(response)
-
-# response = lora_send_text("hello world")
-# print(response)
-
-print("finishd")
-
-time.sleep(2)
+main()
