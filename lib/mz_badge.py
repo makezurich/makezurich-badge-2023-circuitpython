@@ -70,7 +70,7 @@ INFO_COLORS = {
     'hw': YELLOW,
     'sw': RED,
     'design': BLUE,
-    'usecase': GREEN,
+    'business': GREEN,
 }
 
 def scale_tuple(t,factor) -> tuple:
