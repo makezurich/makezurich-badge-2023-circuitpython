@@ -37,7 +37,9 @@ import time
 import board
 import busio
 import neopixel
+import os
 from rainbowio import colorwheel
+import adafruit_simplemath
 
 
 __version__ = "0.0.0+auto.0"
@@ -53,15 +55,34 @@ SDA_0 = board.GP20
 SCL_0 = board.GP21
 SDA_1 = board.GP2
 SCL_1 = board.GP3
+ADC_0 = board.GP26
+ADC_1 = board.GP27
 
-class Neopixel:
-    RED = (255, 0, 0)
-    YELLOW = (255, 150, 0)
-    GREEN = (0, 255, 0)
-    CYAN = (0, 255, 255)
-    BLUE = (0, 0, 255)
-    PURPLE = (180, 0, 255)
-    BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+YELLOW = (255, 150, 0)
+GREEN = (0, 255, 0)
+CYAN = (0, 255, 255)
+BLUE = (0, 0, 255)
+PURPLE = (180, 0, 255)
+BLACK = (0, 0, 0)
+
+INFO_COLORS = {
+    'hw': YELLOW,
+    'sw': RED,
+    'design': BLUE,
+    'usecase': GREEN,
+}
+
+def scale_tuple(t,factor) -> tuple:
+    return tuple([i * factor for i in t])
+
+def fade_tuples(t1,t2,val=0.5) -> tuple:
+    val2 = 1 - val
+    t1 = scale_tuple(t1,val)
+    t2 = scale_tuple(t2,val2)
+    return tuple(map(lambda x, y: x + y, t1, t2))
+
+class LEDs:
 
     def __init__(self,pin=NEO_PXL):
         self.pin = pin
@@ -82,6 +103,60 @@ class Neopixel:
                 self.pixels[i] = colorwheel(rc_index & 255)
             self.pixels.show()
             time.sleep(wait)
+
+    def set_pixel(self,x,y,color):
+        if x > 1:
+            x = 1
+        if y > 2:
+            y = 2
+        map = [[1,0,5],[2,3,4]]
+        self.pixels[map[x][y]] = color
+        self.pixels.show()
+
+    def clear(self):
+        self.pixels.fill(BLACK)
+        self.pixels.show()
+
+    def fill(self,color):
+        self.pixels.fill(color)
+        self.pixels.show()
+
+    def show_info(self) -> None:
+        self.set_pixel(0,0,(INFO_COLORS[os.getenv("role_1").lower()]))
+        self.set_pixel(0,1,(INFO_COLORS[os.getenv("role_2").lower()]))
+        self.set_pixel(0,2,(INFO_COLORS[os.getenv("role_3").lower()]))
+        if 'true' in os.getenv("photo_allowed").lower():
+            self.set_pixel(1,0,GREEN)
+        else:
+            self.set_pixel(1,0,RED)
+
+    def traffic_light(self,val,threshold_1=33,threshold_2=66) -> None:
+        if val < threshold_1:
+            self.fill_pixel(GREEN)
+        elif val >= threshold_2:
+            self.fill_pixel(RED)
+        else:
+            self.fill_pixel(YELLOW)
+    
+    def traffic_light_pixel(self,x,y,val,threshold_1=33,threshold_2=66) -> None:
+        if val < threshold_1:
+            self.set_pixel(x,y,GREEN)
+        elif val >= threshold_2:
+            self.set_pixel(x,y,RED)
+        else:
+            self.set_pixel(x,y,YELLOW)
+
+    def gauge(self,val,min=0,max=100,color=BLUE) -> None:
+        pixl = adafruit_simplemath.map_range(val, min, max, 0.0, 5.9)
+        int_pixl = int(pixl)
+        for i in range(0,int_pixl):
+            self.pixels[i] = color
+        self.pixels[int_pixl] = scale_tuple(color,pixl%1)
+        self.pixels.show()
+
+    def fade_pixel(self,x,y,val,color1=GREEN,color2=RED) -> None:
+        self.set_pixel(x,y,fade_tuples(color1,color2,val))
+        
 
 class LoRa_module:
 
