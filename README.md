@@ -28,6 +28,9 @@ Lots of existing libraries are bundled in the zip, which you can copy paste to y
 
 > To prevent mistakes I recommend to delete the folders lib/adafruit_featherwing and lib/adafruit_seesaw
 
+## CircuitPython Essentials
+Adafruit has a great list of examples on [CircuitPython Essentials](https://learn.adafruit.com/circuitpython-essentials/circuitpython-essentials). Many examples of this repository are taken from there.
+
 ## IDE's and extensions that can make your life easier
 
 ### VS code
@@ -109,10 +112,27 @@ screen /dev/tty.usbmodemXXX 115200
 ```
 
 ### CircuitPython vs Micropython
+CircuitPython is a fork of MicroPython that includes a more extensive set of libraries and drivers out of the box, making it easier to get started with. It also has a higher level of abstraction, which can make it easier to write code quickly, and supports a growing number of boards and peripherals.
 
-`import machine` is used by micropython
+CircuitPython is heavly maintained by Adafruit, which provides many examples and libraries for all their libraries.
+
+If you see any `import machine` the code is probably using micropython.
 
 ## Hardware
+
+### Grove Kit
+Examples for the Grove Basic Kit can be found under 06-grove-starterkit.
+For more see their [wiki](https://wiki.seeedstudio.com/Grove-Starter-Kit-for-Raspberry-Pi-Pico/) with examples in **micropython**.
+
+‼️ Help my kit is incomplete! ‼️ Check with the staff or see if you can swap it with other sensors for example provided by Sensirion
+
+### Sensirion Sensors
+[Sensirion](https://www.sensirion.com) sponsored sensors. Examples can be found under `12-sensirion`
+
+* Grove SEN5X All in One [wiki](https://wiki.seeedstudio.com/Grove_SEN5X_All_in_One/)
+* Grove - CO2 & Temperature & Humidity Sensor (SCD30) [wiki](https://wiki.seeedstudio.com/Grove-CO2_Temperature_Humidity_Sensor-SCD30/)
+* Grove - CO2 & Temperature & Humidity Sensor（SCD41) [wiki](https://wiki.seeedstudio.com/Grove-CO2_&_Temperature_&_Humidity_Sensor-SCD41/)
+* Grove Temp&Humi Sensor (SHT40) [wiki](https://wiki.seeedstudio.com/Grove-SHT4x/)
 
 ### AP9 box
 
@@ -136,3 +156,4 @@ The MakeZurich Badge fits into a standard AP9 box (80x80x35mm).
 * Does every badge have an unique EUI? -> yes
 * How much is the difference for LoRa between a handcrafted binary payload vs serialising to JSON text payload?
 * What are AT commands? -> AT commands are used in modems and other hardware for querying or setting parameters [more](https://www.commfront.com/pages/at-commands)
+* Does CircuitPython support hardware interrupts? -> No, [FAQ](https://learn.adafruit.com/cooperative-multitasking-in-circuitpython-with-asyncio?view=all#faq-3106700)
