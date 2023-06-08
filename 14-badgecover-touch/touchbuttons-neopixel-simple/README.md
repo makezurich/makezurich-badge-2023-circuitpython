@@ -8,6 +8,6 @@ Import them from the adafruit bundle either manually or automatically with VS co
     - Documentation: https://docs.circuitpython.org/projects/neopixel/en/latest/
 
 ## Modification needed on the badge-cover
-TBW.
+See [README in parent folder](../README.md)
 
 ## More information
