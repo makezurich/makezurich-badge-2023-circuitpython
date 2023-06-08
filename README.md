@@ -149,8 +149,8 @@ The MakeZurich Badge fits into a standard AP9 box (80x80x35mm).
 * How do you receive packages? You need to send a package and in the response downlink data is included.
 * Are the lora configuration values channel, mode, class, appkey persisted? -> Yes
 * Can you read out the AT+KEY of a device? -> No, all KEYs are unreadable for security, the one who forgets his KEY need rewrite with a new key.
-* How to measure RSSI, is there a command?
-* What is a good RSSI?
+* How to measure RSSI, is there a command? -> In the TTN console event details, you can inspect what the receiving gateways report (sometimes multiple gateways receive your packets).
+* What is a good RSSI? -> Higher than -120 (minimum you can have) and usually below -40 (right next to the gateway).
 * Why is OTAA better than ABP? [link](https://www.thethingsindustries.com/docs/devices/abp-vs-otaa/#otaa)
 * What does the python package "supervisor" do? It is used to receive data over serial, while being plugged into USB.
 * Does every badge have an unique EUI? -> yes
