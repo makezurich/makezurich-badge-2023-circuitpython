@@ -21,7 +21,7 @@ Classes:
   - `gauge(val,min=0,max=100,color=BLUE)`: shows *val* on 0 to 6 LEDs, if the *val* is between values the last LED is dimmed.
   - `fade_pixel(x,y,val,color1=GREEN,color2=RED)`: Sets LED at (*x*,*y*) to the color between *color1* and *color2* according to *val* between 0.0 and 1.0.
 
-- *LoRa_module:* class to talk to the LoRa module.
+- *LoRaModule:* class to talk to the LoRa module.
 
   - `show_information()`: shows some info about the module
   - `set_mode(mode)`: sets the join mode, 'OTAA' is recommended
