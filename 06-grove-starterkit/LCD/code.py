@@ -9,14 +9,11 @@ import busio
 
 from grove_lcd_i2c import Grove_LCD_I2C
 
-print("MicroPython on Raspberry Pi Pico")
-
 LCD_SCL = board.GP3
 LCD_SDA = board.GP2
 LCD_ADDR = 0x3E
 
 i2c = busio.I2C(scl=LCD_SCL, sda=LCD_SDA)
-# print(i2c.scan())
 lcd = Grove_LCD_I2C(i2c, LCD_ADDR)
 
 while True:

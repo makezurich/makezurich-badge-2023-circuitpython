@@ -1,3 +1,5 @@
+# hardware: https://www.seeedstudio.com/LoRa-E5-Wireless-Module-p-4745.html
+# AT Commands https://files.seeedstudio.com/products/317990687/res/LoRa-E5%20AT%20Command%20Specification_V1.0%20.pdf
 # TODO(yw): parse AT command response correctly
 
 import board
@@ -7,7 +9,7 @@ import time
 
 uart = busio.UART(board.GP4, board.GP5, baudrate=9600, timeout=20)
 
-def at_send(cmd, max_time=5):
+def at_send(cmd, max_time=10):
     if not isinstance(cmd, bytes):
         print("cmd must be a byte string, terminated with new line")
         return ""
@@ -58,11 +60,11 @@ def lora_set_datarate():
     return result_string
 
 def lora_join():
-    result_string = at_send(b"AT+JOIN\n", 5)
+    result_string = at_send(b"AT+JOIN\n", 10)
     return result_string
 
 def lora_set_appkey(appkey):
-    result_string = at_send(b"AT+KEY=APPKEY," + appkey + "\n", 5)
+    result_string = at_send(b"AT+KEY=APPKEY," + appkey + "\n", 10)
     return result_string
 
 # TODO(yw): wait for response, with timeout

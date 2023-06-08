@@ -8,8 +8,8 @@
 # |---------------
 # 1 2 3 4 5 6 7 8
 #
-# 1: Serial RXD
-# 2: Serial TXD
+# 1: Serial RXD (grove white)
+# 2: Serial TXD (grove yellow)
 # 3: GND (Ground)
 # 4: VCC 3.3v (Supply voltage)
 # 5: V_BCKP (Backup voltage supply)
