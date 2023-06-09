@@ -61,4 +61,4 @@ if __name__ == '__main__':
         print(f"\nMessage payload:\n")
         print(get_payload(myjson))
     else:
-        print("No message found for device ID {DEVICE_ID}.")
+        print(f"No message found for device ID {DEVICE_ID}.")
