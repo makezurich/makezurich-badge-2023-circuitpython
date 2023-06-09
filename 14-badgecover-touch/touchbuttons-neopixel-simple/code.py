@@ -9,13 +9,13 @@ import board
 import touchio
 import neopixel
 
-# GP9, GP19, GP28 and GP14 connect to the touchpad (or a simple wire) and from there it needs 
+# GP9, GP19, GP28 and GP14 connect to the touchpad (or a simple wire) and from there it needs
 # a 1M Ohm resistor to GND
 # see readme for needed extension to be made to the cover in order for this to work
 tp1 = touchio.TouchIn(board.GP9)
 tp2 = touchio.TouchIn(board.GP19)
-tp3 = touchio.TouchIn(board.GP28)
-tp4 = touchio.TouchIn(board.GP14)
+# tp3 = touchio.TouchIn(board.GP28)
+# tp4 = touchio.TouchIn(board.GP14)
 
 # Setup the LED configuration for the 6 pixels on the badge
 pixel_pin = board.GP22
@@ -45,15 +45,15 @@ while True:
         pixels[2] = GREEN
     else:
         pixels[2] = BLACK
-    print("TP3 = ", tp3.value)
-    if(tp3.value):
-        pixels[5] = YELLOW
-    else:
-        pixels[5] = BLACK
-    print("TP4 = ", tp4.value)
-    if(tp4.value):
-        pixels[4] = BLUE
-    else:
-        pixels[4] = BLACK
+    # print("TP3 = ", tp3.value)
+    # if(tp3.value):
+    #     pixels[5] = YELLOW
+    # else:
+    #     pixels[5] = BLACK
+    # print("TP4 = ", tp4.value)
+    # if(tp4.value):
+    #     pixels[4] = BLUE
+    # else:
+    #     pixels[4] = BLACK
     pixels.show()
     time.sleep(0.1)
