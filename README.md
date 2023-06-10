@@ -50,9 +50,11 @@ Get it from the marketplace directly inside VS code, more info can be found in t
 - VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=joedevivo.vscode-circuitpython
 
 ## LoRa
-We identified two patterns:
-* Confirmed delivery, you want to know if sending succeeded. Joining the network is done with OTAA and packages are sent with confirmation (ACK).
-* Fire and forget, you send and hope some gateway will receive it. Sending package is done by using ABP and without ACK.
+Two ways of sending packages:
+* Confirmed delivery, you want to know if sending succeeded, send packages with confirmation (ACK).
+* Fire and forget, you hope some gateway will receive it. Send without confirmation (no ACK).
+
+> The inital join is only done once to get the session keys, device will store them and stay joined.
 
 ### Setting up LoRa OTAA
 
