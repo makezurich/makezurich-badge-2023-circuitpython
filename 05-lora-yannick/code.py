@@ -1,10 +1,7 @@
 # This example packages the data into a bytearray with python struct
 # In ttn_payload_formatter.js we show an example on how to parse it again.
 # You can setup the ttn_payload_formatter.js in the TTN console
-
-# hardware: https://www.seeedstudio.com/LoRa-E5-Wireless-Module-p-4745.html
-# AT Commands https://files.seeedstudio.com/products/317990687/res/LoRa-E5%20AT%20Command%20Specification_V1.0%20.pdf
-# TODO(yw): parse AT command response correctly
+# NOTE(yw): implementation is very minimalistic without error handling, downstream packets etc
 
 import board
 import busio
@@ -46,14 +43,13 @@ def main():
     # i: int, 4byte
     # f: float, 4byte
     # d: double, 8byte
-    buffer = struct.pack('>bfffbh', device_state, latitude, longitute, temperature, humidity, co2_ppm)
-    print("sending", binascii.hexlify(buffer))
+    #buffer = struct.pack('>bfffbh', device_state, latitude, longitute, temperature, humidity, co2_ppm)
+    #print("sending", binascii.hexlify(buffer))
+    #response = lora_send_hex(buffer, with_confirmation=False)
+    #print(response)
 
-    response = lora_send_hex(buffer)
+    response = lora_send_text("hello world", with_confirmation=False)
     print(response)
-
-    # response = lora_send_text("hello world")
-    # print(response)
 
     print("finished")
 
@@ -103,7 +99,6 @@ def lora_get_datarate():
     return result_string
 
 def lora_set_datarate():
-    # TODO(yw): should accept
     result_string = at_send(b"AT+DR=5\n")
     return result_string
 
@@ -115,10 +110,7 @@ def lora_set_appkey(appkey):
     result_string = at_send(b"AT+KEY=APPKEY," + appkey + "\n", 10)
     return result_string
 
-def lora_send_text(msg):
-    """Function to send data, waits for confirmation
-    :param msg: data to send, can be string or bytes
-    """
+def lora_send_text(msg, with_confirmation=True):
     payload = b""
     downstream_messages = []
     if isinstance(msg, str):
@@ -128,29 +120,32 @@ def lora_send_text(msg):
         print("Please provide a string")
         return
 
-    cmd = b"AT+CMSG=" + payload + b"\n"
+    cmd = b"AT+CMSG=\""
+    if with_confirmation == False:
+        cmd = b"AT+MSG=\""
+
+    cmd = cmd + payload + b"\"\n"
     response = at_send(cmd, 10)
-    # TODO(yw): check for ": Done"
     return response
 
-def lora_send_hex(msg):
-    """Function to send data, waits for confirmation
+def lora_send_hex(msg, with_confirmation=True):
+    """Function to send data
     :param msg: data to send, can be string or bytes
     """
-    payload = b""
+    payload = msg
     downstream_messages = []
     if isinstance(msg, str):
         userinput = msg.strip()
         payload = bytes(userinput, "utf-8")
-    else:
-        payload = msg
 
     payload = binascii.hexlify(payload)
 
-    cmd = b"AT+CMSGHEX=" + payload + b"\n"
-    response = at_send(cmd, 10)
-    # TODO(yw): check for ": Done"
-    return response
+    cmd = b"AT+CMSGHEX=\""
+    if with_confirmation == False:
+        cmd = b"AT+MSGHEX=\""
 
+    cmd = cmd + payload + b"\"\n"
+    response = at_send(cmd, 10)
+    return response
 
 main()
