@@ -1,5 +1,7 @@
 # Getting Started
 
+All examples were tested around June 2023 with Pico W and CircuitPython 8.1.0
+
 ## Hardware
 
 * Raspberry Pi Pico W (W stands for Wi-Fi)
